@@ -13,4 +13,12 @@ export class UserRepository implements IUserRepository {
   async create(data: UserDTO): Promise<void> {
     await prisma.user.create({ data });
   }
+
+  async findByUsername(username: string): Promise<User> {
+    return await prisma.user.findUniqueOrThrow({
+      where: {
+        username,
+      },
+    });
+  }
 }
