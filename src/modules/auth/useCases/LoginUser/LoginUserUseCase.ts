@@ -8,12 +8,16 @@ export class LoginUserUseCase {
   constructor(
     @inject("AuthRepository")
     private authRepository: IAuthRepository
-  ) {}
+  ) {
+    /**/
+  }
 
-  async execute(username: string): Promise<{ 
-    token: string,
-    refreshToken: RefreshToken 
+  async execute(username: string): Promise<{
+    token: string;
+    refreshToken: RefreshToken;
   }> {
-    return await this.authRepository.signIn(username);
+    const data = await this.authRepository.signIn(username);
+
+    return data;
   }
 }

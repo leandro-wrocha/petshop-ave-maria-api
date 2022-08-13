@@ -7,9 +7,13 @@ export class RefreshTokenUseCase {
   constructor(
     @inject("AuthRepository")
     private authRepository: IAuthRepository
-  ) {}
+  ) {
+    /**/
+  }
 
   async execute(id: string): Promise<string> {
-    return await this.authRepository.refreshToken(id);
+    const data = await this.authRepository.refreshToken(id);
+
+    return data;
   }
 }

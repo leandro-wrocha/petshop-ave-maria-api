@@ -7,9 +7,11 @@ export class CreateUserUseCase {
   constructor(
     @inject("UserRepository")
     private userRepository: IUserRepository
-  ) {}
+  ) {
+    /**/
+  }
 
-  async execute(data: UserDTO) {
+  async execute(data: UserDTO): Promise<void> {
     await this.userRepository.create(data);
   }
 }

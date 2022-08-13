@@ -4,11 +4,7 @@ import { verify } from "jsonwebtoken";
 import { AppError } from "@shared/errors/AppError";
 
 export class EnsuredAuthenticated {
-  public static execute(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ) {
+  public execute(request: Request, response: Response, next: NextFunction) {
     const { authorization } = request.headers;
 
     if (!authorization) {

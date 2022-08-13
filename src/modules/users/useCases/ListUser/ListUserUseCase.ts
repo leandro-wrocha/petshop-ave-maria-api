@@ -7,9 +7,11 @@ export class ListUserUseCase {
   constructor(
     @inject("UserRepository")
     private userRepository: IUserRepository
-  ) {}
+  ) { /**/ }
 
   async execute(): Promise<User[]> {
-    return await this.userRepository.list();
+    const users = await this.userRepository.list();
+
+    return users;
   }
 }
