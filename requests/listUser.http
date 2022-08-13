@@ -1,3 +1,0 @@
-GET http://localhost:3302/users HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjAzNzA3MDAsImV4cCI6MTY2MDM3NzkwMCwic3ViIjoiOTVjMWRjZGYtYTZhZS00MGQ4LWEzMWQtYzc4NDc4MmQ4N2U4In0.L4YtEr_29G-48poIPUKne5T504N18THEV5UuqOd6ipE
