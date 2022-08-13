@@ -6,8 +6,16 @@
   "author": "Leandro Rocha <leandro.wrocha98@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
-    "test": "jest"
+    "start": "prisma generate && NODE_ENV=production tsnd -r tsconfig-paths/register dist/src/index.js",
+    "dev": 
+      "NODE_ENV=development tsnd --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
+    "build": "tsc",
+    "test": "jest",
+    "schemaTest": "prisma generate --schema=./prisma/test/schema.spec.prisma",
+    "schemaTestMigrate": "prisma migrate dev --schema=./prisma/test/schema.spec.prisma"
+  },
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
