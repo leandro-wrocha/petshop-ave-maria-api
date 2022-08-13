@@ -18,6 +18,11 @@
     ],
     "rules": {
         "import/prefer-default-export": 0,
-        "import/extensions": 0
+        "import/extensions": [2, {
+            "extensions": {
+                "ts": 2
+            }
+        }],
+        "import/no-unresolved": 0
     }
 }

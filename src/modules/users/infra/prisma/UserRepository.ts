@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
-import { AppError } from "../../../../shared/errors/AppError";
-import { prisma } from "../../../../shared/infra/prisma";
+import { AppError } from "@shared/errors/AppError";
+import { prisma } from "@shared/infra/prisma";
 import { UserDTO } from "../../dtos";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
@@ -14,12 +14,12 @@ export class UserRepository implements IUserRepository {
   async create(data: UserDTO): Promise<void> {
     const userAlreadyExists = await prisma.user.findFirst({
       where: {
-        username: data.username
-      }
-    })
+        username: data.username,
+      },
+    });
 
-    if(userAlreadyExists) {
-      throw new AppError('Unathorization', 'User already exists', 401);
+    if (userAlreadyExists) {
+      throw new AppError("Unathorization", "User already exists", 401);
     }
 
     await prisma.user.create({ data });
@@ -28,12 +28,12 @@ export class UserRepository implements IUserRepository {
   async findByUsername(username: string): Promise<User> {
     const userAlreadyExists = await prisma.user.findFirst({
       where: {
-        username
-      }
-    })
+        username,
+      },
+    });
 
-    if(!userAlreadyExists) {
-      throw new AppError('Error', 'User no exists', 404);
+    if (!userAlreadyExists) {
+      throw new AppError("Error", "User no exists", 404);
     }
 
     return userAlreadyExists;

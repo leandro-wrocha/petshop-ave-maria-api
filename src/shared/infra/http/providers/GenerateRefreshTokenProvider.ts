@@ -1,19 +1,19 @@
 import { RefreshToken } from "@prisma/client";
 import dayjs from "dayjs";
 
-import { prisma } from "../../prisma";
+import { prisma } from "@shared/infra/prisma";
 
 export class GenerateRefreshTokenProvider {
   async execute(userId: string): Promise<RefreshToken> {
-    const expiresIn = dayjs().add(60, 'day').unix()
+    const expiresIn = dayjs().add(60, "day").unix();
 
     const generateRefreshToken = await prisma.refreshToken.create({
       data: {
         userId,
-        expiresIn
-      }
-    })
+        expiresIn,
+      },
+    });
 
-    return generateRefreshToken
+    return generateRefreshToken;
   }
 }

@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app } from "../../../../shared/infra/http/app";
+import { app } from "@shared/infra/http/app";
 
 describe("CreateUserController POST /users", () => {
   it("should create an user", async () => {
