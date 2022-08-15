@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { verify } from "jsonwebtoken";
 import { container } from "tsyringe";
 
 import { ListUserUseCase } from "./ListUserUseCase";

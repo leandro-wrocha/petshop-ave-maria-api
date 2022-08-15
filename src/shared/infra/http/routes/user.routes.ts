@@ -3,15 +3,19 @@ import { celebrate, Joi, Segments } from "celebrate";
 
 import { CreateUserController } from "@modules/users/useCases/CreateUser/CreateUserController";
 import { ListUserController } from "@modules/users/useCases/ListUser/ListUserController";
-import { EnsuredAuthenticated } from "../middlewares/EnsuredAuthenticatedMiddleware";
+import { EnsuredAuthenticatedMiddleware } from "../middlewares/EnsuredAuthenticatedMiddleware";
 
 const userRoutes = Router();
 
 const listUserController = new ListUserController();
 const createUserController = new CreateUserController();
-const ensuredAuthenticated = new EnsuredAuthenticated();
+const ensuredAuthenticatedMiddleware = new EnsuredAuthenticatedMiddleware();
 
-userRoutes.get("/", ensuredAuthenticated.execute, listUserController.handle);
+userRoutes.get(
+  "/",
+  ensuredAuthenticatedMiddleware.execute,
+  listUserController.handle
+);
 userRoutes.post(
   "/",
   celebrate({

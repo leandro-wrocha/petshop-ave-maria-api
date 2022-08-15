@@ -1,10 +1,15 @@
-import { NextFunction, Request, Response } from "express";
-import { verify } from "jsonwebtoken";
+import { JwtPayload, verify } from "jsonwebtoken";
 
 import { AppError } from "@shared/errors/AppError";
 
-export class EnsuredAuthenticatedMiddleware {
-  public execute(request: Request, response: Response, next: NextFunction) {
+export interface Request {
+  headers: {
+    authorization?: string | undefined;
+  };
+}
+
+export class EnsuredAuthenticatedMiddlewareFake {
+  public execute(request: Request): string | JwtPayload {
     const { authorization } = request.headers;
 
     if (!authorization) {
@@ -14,11 +19,9 @@ export class EnsuredAuthenticatedMiddleware {
     const [, token] = authorization.split(" ");
 
     try {
-      verify(token, process.env.SECRET_KEY || "secretDevelop");
+      return verify(token, process.env.SECRET_KEY || "secretDevelop");
     } catch (error) {
       throw new AppError("Unauthorized", "Token is invalid", 401);
     }
-
-    next();
   }
 }
