@@ -1,0 +1,65 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Está é a documentação da api da aplicação Petshop Ave Maria",
+    "version": "1.0.0",
+    "title": "Petshop Ave Maria",
+    "contact": {
+      "email": "leandro.wrocha98@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "user",
+      "description": "Ações permitidas por usuários"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:3302",
+      "description": "Server development"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Create an user, return void",
+        "description": "aa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "default": "Leandro R",
+                    "type": "string"
+                  },
+                  "username": {
+                    "default": "leandro-wr",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Return void",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "User already exists",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
