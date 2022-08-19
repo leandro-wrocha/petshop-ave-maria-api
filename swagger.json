@@ -12,6 +12,10 @@
     {
       "name": "user",
       "description": "Ações permitidas por usuários"
+    },
+    {
+      "name": "Login",
+      "description": "Authenticate Employee"
     }
   ],
   "servers": [
@@ -23,8 +27,8 @@
   "paths": {
     "/users": {
       "post": {
-        "summary": "Create an user, return void",
-        "description": "aa",
+        "tags": ["user"],
+        "summary": "Create a employee",
         "requestBody": {
           "required": true,
           "content": {
@@ -47,15 +51,166 @@
         },
         "responses": {
           "201": {
-            "description": "Return void",
+            "description": "Return success",
+            "content": {}
+          },
+          "400": {
+            "description": "Required input name and username",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "example": {
+                  "statusCode": 400,
+                  "error": "Bad Request",
+                  "message": "Validation failed",
+                  "validation": {
+                    "body": {
+                      "source": "body",
+                      "keys": ["name or username"],
+                      "message": "\"name\" or \"username\" is required"
+                    }
+                  }
+                }
+              }
             }
           },
           "401": {
             "description": "User already exists",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "example": {
+                  "status": "Unauthorization",
+                  "message": "User already exists"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "description": "This should will authenticate a employee, to access application",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "default": "leandro-wrocha"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Employee authenticated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "token": "Your token",
+                  "refreshToken": {
+                    "id": "refreshTokenId"
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "refreshToken": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Username is required",
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 400,
+                  "error": "Bad Request",
+                  "message": "Validation failed",
+                  "validation": {
+                    "body": {
+                      "source": "body",
+                      "keys": ["username"],
+                      "message": "\"username\" is required"
+                    }
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "default": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "default": "Bad Request"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Validation failed"
+                    },
+                    "validation": {
+                      "type": "object",
+                      "properties": {
+                        "body": {
+                          "type": "object",
+                          "properties": {
+                            "source": {
+                              "type": "string",
+                              "default": "body"
+                            },
+                            "keys": {
+                              "type": "array",
+                              "default": ["username"]
+                            },
+                            "message": {
+                              "type": "string",
+                              "default": "username\" is required"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Employee no exists",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "Unauthorized",
+                  "message": "User no exists"
+                },
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
         }
