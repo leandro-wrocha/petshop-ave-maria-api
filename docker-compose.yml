@@ -2,12 +2,14 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:14.5-bullseye
+    image: postgres:14.6-bullseye
     container_name: petshop-ave-maria
     environment:
       POSTGRES_DB: "petshop-ave-maria"
       POSTGRES_PASSWORD: "123456"
       POSTGRES_USER: "postgres"
+    ports:
+      - 5432:5432
     volumes: 
       - /var/www/databases/petshop-ave-maria:/var/lib/postgresql/data
     networks:
