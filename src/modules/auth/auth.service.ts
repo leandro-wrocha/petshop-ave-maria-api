@@ -1,29 +1,32 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
 import { ISignInDTO, IUserDTO, Role } from './dto/sign-in.dto';
 import { IAuthService } from './interfaces/auth.interface';
 import * as bcrypt from 'bcrypt';
+import { PrismaService } from 'src/shared/prisma/prisma.service';
 
 @Injectable()
 export class AuthService implements IAuthService {
-  private readonly prisma: PrismaClient;
+  constructor(private prismaService: PrismaService) {}
 
   async signIn({ email, password }: ISignInDTO): Promise<IUserDTO> {
-    console.log('oka');
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prismaService.user.findUnique({
       where: {
         email,
       },
     });
-    console.log('ko');
 
     if (!user) {
-      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        'Email or password wrong',
+        HttpStatus.UNAUTHORIZED,
+      );
     }
 
-    if (!bcrypt.compare(password, user.password)) {
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
       throw new HttpException(
-        'User or password wrong!',
+        'Email or password wrong!',
         HttpStatus.UNAUTHORIZED,
       );
     }

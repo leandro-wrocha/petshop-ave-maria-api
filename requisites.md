@@ -1,45 +1,48 @@
-# Users #
+# Users
 
- - **Super-usuário**
- - **Empregado**
- - **Cliente**
+- **Super-usuário**
+- **Empregado**
+- **Cliente**
 
 ## Super-usuário
 
- - *CRUD de empregados.*
- - *CRUD de pets.*
- - *Informações sobre os clientes.*
+- _CRUD de empregados._
+- _CRUD de pets._
+- _Informações sobre os clientes._
 
 ## Empregados
 
- - *CRUD de pets.*
- - *Cadastrar, Listar, Atualizar clientes.*
- - *Notificar clientes.*
+- _CRUD de pets._
+- _Cadastrar, Listar, Atualizar clientes._
+- _Notificar clientes._
 
 ## Clientes
 
- - *Ver apenas os dados de seus pets.*
- - *Recebe notificações de serviços realizados.*
+- _Ver apenas os dados de seus pets._
+- _Recebe notificações de serviços realizados._
 
-# Dados #
+# Dados
 
 ## Empregados (**LOCALHOST**)
 
- - **nome**
- - **cpf**
- - **email**
- - **password**
+- **nome**
+- **cpf**
+- **email**
+- **password**
+- **endereço**
+- **telefone**
 
 ## Clientes (**MOBILE**)
 
- - **nome**
- - **cpf**
- - **email?**
- - **endereço?**
- - **telefone**
+- **nome**
+- **cpf**
+- **email?**
+- **endereço?**
+- **telefone**
 
- ### PETS DOS CLIENTES ####
-  - **nome**
-  - **idade**
-  - **tipo**
-  - **raça**
+### PETS DOS CLIENTES
+
+- **nome**
+- **idade**
+- **tipo**
+- **raça**
